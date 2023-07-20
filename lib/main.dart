@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get_ui/bin/get.dart';
 import 'package:menu_bar/menu_bar.dart';
 
+import 'getx/global_context.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -14,6 +16,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      scaffoldMessengerKey: scaffoldKey,
+      navigatorKey: navigatorKey,
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -67,15 +71,15 @@ class _MyHomePageState extends State<MyHomePage> {
             menuItems: [
               MenuButton(
                 text: const Text('Create Project'),
-                onTap: () {},
+                onTap: () => callTask(['create', 'project']),
               ),
               MenuButton(
                 text: const Text('Create View'),
-                onTap: () {},
+                onTap: () => callTask(['create', 'view']),
               ),
               MenuButton(
                 text: const Text('Create Controller'),
-                onTap: () => callTask(['get create view:dialogview on bin']),
+                onTap: () => callTask(['create', 'controller']),
               ),
               const MenuDivider(),
               MenuButton(

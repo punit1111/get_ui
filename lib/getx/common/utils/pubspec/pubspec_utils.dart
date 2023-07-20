@@ -70,7 +70,7 @@ class PubspecUtils {
           LocaleKeys.options_no.tr,
         ],
       );
-      final result = menu.choose();
+      final result = await menu.choose();
       if (result.index != 0) {
         return false;
       }

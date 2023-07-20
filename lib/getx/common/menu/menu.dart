@@ -6,7 +6,7 @@ class Menu {
 
   Menu(this.choices, {this.title = ''});
 
-  Answer choose() {
+  Future<Answer> choose() async {
     // final dialog = CLI_Dialog(listQuestions: [
     //   [
     //     {'question': title, 'options': choices},
@@ -18,9 +18,13 @@ class Menu {
     // final result = answer['result'] as String;
     print("");
     //final result = menu(prompt: title, options: choices, defaultOption: choices[0]);
-    showInputDialog(title: 'title');
-    final result = '';
-    final index = choices.indexOf(result);
+
+    final result = await showInputDialogMenu(
+      title: title,
+      options: choices,
+      defaultOption: choices[0],
+    );
+    final index = choices.indexOf(result!);
 
     return Answer(result: result, index: index);
   }

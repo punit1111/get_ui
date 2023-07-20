@@ -59,7 +59,7 @@ class CreatePageCommand extends Command {
         title:
             Translation(LocaleKeys.ask_existing_page.trArgs([name])).toString(),
       );
-      final result = menu.choose();
+      final result = await menu.choose();
       if (result.index == 0) {
         _writeFiles(path, name!, overwrite: true);
       } else if (result.index == 2) {

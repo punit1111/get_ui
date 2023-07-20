@@ -17,7 +17,7 @@ Future<bool> createMain() async {
 
     final menu = Menu([LocaleKeys.options_yes.tr, LocaleKeys.options_no.tr],
         title: LocaleKeys.ask_lib_not_empty.tr);
-    final result = menu.choose();
+    final result = await menu.choose();
     if (result.index == 1) {
       LogService.info(LocaleKeys.info_no_file_overwritten.tr);
       return false;

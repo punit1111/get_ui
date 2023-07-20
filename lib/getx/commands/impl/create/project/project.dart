@@ -24,7 +24,7 @@ class CreateProjectCommand extends Command {
       'Flutter Project',
       'Get Server',
     ], title: 'Select which type of project you want to create ?');
-    final result = menu.choose();
+    final result = await menu.choose();
     String? nameProject = name;
     if (name == '.') {
       // final dialog = CLI_Dialog(questions: [
@@ -60,20 +60,20 @@ class CreateProjectCommand extends Command {
 
       final iosLangMenu =
           Menu(['Swift', 'Objective-C'], title: LocaleKeys.ask_ios_lang.tr);
-      final iosResult = iosLangMenu.choose();
+      final iosResult = await iosLangMenu.choose();
 
       var iosLang = iosResult.index == 0 ? 'swift' : 'objc';
 
       final androidLangMenu =
           Menu(['Kotlin', 'Java'], title: LocaleKeys.ask_android_lang.tr);
-      final androidResult = androidLangMenu.choose();
+      final androidResult = await androidLangMenu.choose();
 
       var androidLang = androidResult.index == 0 ? 'kotlin' : 'java';
 
       final nullSafeMenu = Menu(
           [LocaleKeys.options_yes.tr, LocaleKeys.options_no.tr],
           title: LocaleKeys.ask_use_null_safe.tr);
-      final nullSafeMenuResult = nullSafeMenu.choose();
+      final nullSafeMenuResult = await nullSafeMenu.choose();
 
       var useNullSafe = nullSafeMenuResult.index == 0;
 
@@ -81,7 +81,7 @@ class CreateProjectCommand extends Command {
         'yes',
         'no',
       ], title: LocaleKeys.ask_use_linter.tr);
-      final linterResult = linterMenu.choose();
+      final linterResult = await linterMenu.choose();
 
       await ShellUtils.flutterCreate(path, org, iosLang, androidLang);
 

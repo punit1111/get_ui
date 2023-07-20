@@ -43,7 +43,7 @@ class CreateScreenCommand extends Command {
         LocaleKeys.options_yes.tr,
         LocaleKeys.options_no.tr,
       ], title: LocaleKeys.ask_existing_page.trArgs([name]).toString());
-      final result = menu.choose();
+      final result = await menu.choose();
       if (result.index == 0) {
         _writeFiles(path, name, overwrite: true);
       }

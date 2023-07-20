@@ -19,23 +19,42 @@ class GetCli {
 
   Command _findCommand(int currentIndex, List<Command> commands) {
     try {
+      print('debug print command 0');
+      print('debug print arguments $arguments');
       final currentArgument = arguments[currentIndex].split(':').first;
 
-      var command = commands.firstWhere(
-          (command) =>
-              command.commandName == currentArgument ||
-              command.alias.contains(currentArgument),
-          orElse: () => ErrorCommand('command not found'));
+      print('debug print current Argument $currentArgument');
+      for (var element in commands) {
+        print('debug print commands ${element.commandName} ${element.alias}');
+      }
+
+      var command = commands.firstWhere((command) {
+        print(
+            'debug print firstWhere $currentArgument ${command.commandName} ${command.alias}');
+        return command.commandName == currentArgument ||
+            command.alias.contains(currentArgument);
+      }, orElse: () => ErrorCommand('command not found'));
+      print(
+          'debug print command ${command.commandName} ${command.childrens.toSet().toString()}');
       if (command.childrens.isNotEmpty) {
         if (command is CommandParent) {
+          print('debug print command 1');
           command = _findCommand(++currentIndex, command.childrens);
         } else {
+          print('debug print command 2');
           var childrenCommand = _findCommand(++currentIndex, command.childrens);
           if (childrenCommand is! ErrorCommand) {
+            print('debug print command 3');
             command = childrenCommand;
           }
         }
       }
+
+      for (var element in command.childrens) {
+        print('debug print final command ${command.commandName}');
+        print('debug print final command ${element.commandName}');
+      }
+
       return command;
       // ignore: avoid_catching_errors
     } on RangeError catch (_) {

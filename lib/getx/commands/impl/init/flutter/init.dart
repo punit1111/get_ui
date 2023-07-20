@@ -18,7 +18,7 @@ class InitCommand extends Command {
       'GetX Pattern (by Kauê)',
       'CLEAN (by Arktekko)',
     ], title: 'Which architecture do you want to use?');
-    final result = menu.choose();
+    final result = await menu.choose();
 
     result.index == 0
         ? await createInitGetxPattern()
